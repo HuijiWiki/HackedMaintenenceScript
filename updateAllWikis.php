@@ -14,4 +14,6 @@ while ($res = mysql_fetch_assoc( $query )) {
 foreach($arr as $val){
 	$command = 'php ./update.php --conf=/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php --quick --doshared';
 	exec($command);
+	$command2 = 'ln -s /var/www/src/* /var/www/virtual/'.$val['domain_prefix'].'/';
+	exec($command2);
 }
