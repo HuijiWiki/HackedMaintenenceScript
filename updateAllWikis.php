@@ -22,4 +22,5 @@ foreach($arr as $val){
 	$command4 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipLinks --indexOnSkip --conf=".$conf;
 	exec($command4);
 	$command5 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipParse --conf=".$conf; 
+	exec($command5);
 }
