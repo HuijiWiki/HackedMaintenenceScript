@@ -11,6 +11,8 @@ $query = mysql_query($sql);
 while ($res = mysql_fetch_assoc( $query )) {
 	$arr[] = $res;
 }
+
+putenv("DISABLE_SEARCH_UPDATE = true");
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
 	$command = 'php ./update.php --conf='.$conf.' --quick --doshared';
@@ -19,8 +21,16 @@ foreach($arr as $val){
 	exec($command2);
 	$command3 = "php ../extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php --conf=".$conf;
 	exec($command3);
-	$command4 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipLinks --indexOnSkip --conf=".$conf;
+}	
+putenv("DISABLE_SEARCH_UPDATE = false");
+
+
+foreach($arr as $val){
+	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
+
+	$command4 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipLinks --indexOnSkip --conf=".$conf.' &';
 	exec($command4);
-	$command5 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipParse --conf=".$conf; 
+
+	$command5 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipParse --conf=".$conf.' &'; 
 	exec($command5);
 }
