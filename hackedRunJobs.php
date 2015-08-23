@@ -16,4 +16,6 @@ foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
 	$command = 'php ./runJobs.php --conf='.$conf;
 	exec($command);
+	$command2 = 'php ./generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].' --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
+	exec($command2);
 }	
