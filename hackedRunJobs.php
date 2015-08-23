@@ -14,8 +14,10 @@ while ($res = mysql_fetch_assoc( $query )) {
 
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command = 'php ./runJobs.php --conf='.$conf;
+	$command = 'php /var/www/src/maintenance/runJobs.php --conf='.$conf;
+	echo $command;
 	exec($command);
-	$command2 = 'php ./generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].' --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
+	$command2 = 'php /var/www/src/maintenance/generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].' --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
+	echo $command2;
 	exec($command2);
 }	
