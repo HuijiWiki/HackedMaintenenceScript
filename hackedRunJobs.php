@@ -17,13 +17,13 @@ foreach($arr as $val){
 	$command = 'php /var/www/src/maintenance/runJobs.php --conf='.$conf;
 	if ($val['domain_prefix'] != 'www'){
 		mysql_select_db("huiji_sites",$link);
-		$sql = "UPDATE ".$val['domain_prefix']."job SET  `job_token` =  '' WHERE `job_attemps` > 0;"
-			 . "UPDATE ".$val['domain_prefix']."job SET  `job_token_timestamp` =  '' WHERE `job_attemps` > 0;";
+		$sql = "UPDATE ".$val['domain_prefix']."job SET  `job_token` =  '' WHERE `job_attempts` > 0;"
+			 . "UPDATE ".$val['domain_prefix']."job SET  `job_token_timestamp` =  '' WHERE `job_attempts` > 0;";
 
 	} else {
 		mysql_select_db("huiji_home",$link);
-		$sql = "UPDATE job SET `job_token` =  '' WHERE `job_attemps` > 0;"
-			 . "UPDATE job SET `job_token_timestamp` =  '' WHERE `job_attemps` > 0;";		
+		$sql = "UPDATE job SET `job_token` =  '' WHERE `job_attempts` > 0;"
+			 . "UPDATE job SET `job_token_timestamp` =  '' WHERE `job_attempts` > 0;";		
 	}
 	echo $sql;
 	$query = mysql_query($sql);
