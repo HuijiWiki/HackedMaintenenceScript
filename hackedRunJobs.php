@@ -8,7 +8,7 @@ mysqli_query($link, "SET NAMES UTF8");
 mysqli_select_db($link, "huiji");
 $sql = "select domain_prefix from domain";
 $query = mysqli_query($link, $sql);
-while ($res = mysql_fetch_assoc( $query )) {
+while ($res = mysqli_fetch_assoc( $query )) {
 	$arr[] = $res;
 }
 
