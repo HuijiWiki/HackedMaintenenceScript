@@ -16,12 +16,12 @@ foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
 	$command = 'php /var/www/src/maintenance/runJobs.php --conf='.$conf;
 	if ($val['domain_prefix'] != 'www'){
-		mysql_select_db("huiji-sites",$link);
+		mysql_select_db("huiji_sites",$link);
 		$sql = "UPDATE {$val['domain_prefix']}job SET  `job_token` =  '';
 			UPDATE {$val['domain_prefix']}job SET  `job_token_timestamp` =  '';";
 
 	} else {
-		mysql_select_db("huiji-home",$link);
+		mysql_select_db("huiji_home",$link);
 		$sql = "UPDATE job SET `job_token` =  '';
 			UPDATE job SET  `job_token_timestamp` =  '';";		
 	}
