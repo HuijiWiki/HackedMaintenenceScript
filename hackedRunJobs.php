@@ -26,14 +26,16 @@ foreach($arr as $val){
 		$sql1 = "UPDATE job SET `job_token` =  '' WHERE `job_attempts` > 0";
 		$sql2 = "UPDATE job SET `job_token_timestamp` =  NULL WHERE `job_attempts` > 0";		
 	}
-	echo $sql1 . $sql2;
+	//echo $sql1 . $sql2;
 	$query = mysqli_query($link, $sql1);
 	$query .= mysqli_query($link, $sql2);
 	echo $command;
-	exec($command);
+	$flock = "flock -n /tmp/".$val['domain_prefix'].".lock -c '".$command."'"; 
+	echo $flock;
+	echo exec($flock);
 
-	$command2 = 'php /var/www/src/maintenance/generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].'/sitemap --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
-	echo $command2;
-	exec($command2);
+//	$command2 = 'php /var/www/src/maintenance/generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].'/sitemap --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
+//	echo $command2;
+//	exec($command2);
 
 }	
