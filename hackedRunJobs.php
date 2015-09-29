@@ -18,13 +18,13 @@ foreach($arr as $val){
 	$lowDashPrefix = mysqli_real_escape_string($link, str_replace('.', '_', $val['domain_prefix']));
 	if ($val['domain_prefix'] != 'www'){
 		mysqli_select_db($link, "huiji_sites");
-		$sql1 = "UPDATE ".$lowDashPrefix."job SET  `job_token` =  '' WHERE `job_attempts` > 0";
-		$sql2 =	"UPDATE ".$lowDashPrefix."job SET  `job_token_timestamp` =  NULL WHERE `job_attempts` > 0";
+		$sql1 = "UPDATE ".$lowDashPrefix."job SET  `job_token` =  '' WHERE `job_attempts` > 0 and `job_attempts` < 3";
+		$sql2 =	"UPDATE ".$lowDashPrefix."job SET  `job_token_timestamp` =  NULL WHERE `job_attempts` > 0 and `job_attempts` < 3";
 
 	} else {
 		mysqli_select_db($link, "huiji_home");
-		$sql1 = "UPDATE job SET `job_token` =  '' WHERE `job_attempts` > 0";
-		$sql2 = "UPDATE job SET `job_token_timestamp` =  NULL WHERE `job_attempts` > 0";		
+		$sql1 = "UPDATE job SET `job_token` =  '' WHERE `job_attempts` > 0 and `job_attempts` < 3";
+		$sql2 = "UPDATE job SET `job_token_timestamp` =  NULL WHERE `job_attempts` > 0 and `job_attempts` < 3";		
 	}
 	//echo $sql1 . $sql2;
 	$query = mysqli_query($link, $sql1);
