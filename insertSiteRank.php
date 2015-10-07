@@ -23,9 +23,9 @@ class InsertSiteRank extends Maintenance {
 			$editResult['yesterday'] = $ueb->getSiteEditCount( '', $value, $yesterday, $yesterday );
 			$editResult['week'] = $ueb->getSiteEditCount( '', $value, $lastWeek, $yesterday );
 			$editResult['month'] = $ueb->getSiteEditCount( '', $value, $lastMonth, $yesterday );
-			$viewDate[$value] = round($viewResult['yesterday']+$viewResult['week']/7+$viewResult['month']/30);
-			$editDate[$value] = round($editResult['yesterday']+$editResult['week']/7+$editResult['month']/30);
-			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)/7+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)/30);
+			$viewDate[$value] = round($viewResult['yesterday']+$viewResult['week']/3+$viewResult['month']/10);
+			$editDate[$value] = round($editResult['yesterday']+$editResult['week']/3+$editResult['month']/10);
+			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)/3+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)/10);
 		}
 		//sort arr
 		asort($viewDate);
