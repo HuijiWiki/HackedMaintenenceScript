@@ -74,6 +74,25 @@ class InsertSiteRank extends Maintenance {
 					'site_rank_date' => $yesterday
 				), __METHOD__
 			);
+			//best rank
+			$key_rank = AllSitesInfo::getSiteBestRank( $key );
+			$site_rank = (!is_null($key_rank))?$key_rank:0;
+			if( $rank > $site_rank ){
+				$dbw = wfGetDB( DB_MASTER );
+				$dbw->upsert(
+					'site_best_rank',
+					array(
+						'site_rank' => $rank,
+						'site_prefix' => $key
+					),
+					array(
+						'site_prefix' => $key
+					),
+					array(
+						'site_rank' => $rank
+					), __METHOD__
+				);
+			}
 			$x++;
 		}
 	}
