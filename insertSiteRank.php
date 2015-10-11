@@ -76,7 +76,7 @@ class InsertSiteRank extends Maintenance {
 			);
 			//best rank
 			$key_rank = AllSitesInfo::getSiteBestRank( $key );
-			$site_rank = (!is_null($key_rank))?$key_rank:0;
+			$site_rank = (!is_null($key_rank))?$key_rank:999999;
 			if( $rank <  $site_rank ){
 				$dbw = wfGetDB( DB_MASTER );
 				$dbw->upsert(
