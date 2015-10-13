@@ -52,10 +52,10 @@ class InsertSiteRank extends Maintenance {
 		}
 		//highest score
 		$highest = ($k-1)*100;
-		//Comprehensive 2 4 4
+		//Comprehensive 4 3 5
 		$allRank = array();
 		foreach ($viewRes as $key => $value) {
-			$allRank[$key] = $value*2 + $editRes[$key]*4 +$editUserRes[$key]*4;
+			$allRank[$key] = $value*4 + $editRes[$key]*3 +$editUserRes[$key]*5;
 		}
 		arsort($allRank);
 		$x = 1;
