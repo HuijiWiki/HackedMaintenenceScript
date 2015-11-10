@@ -1,4 +1,5 @@
-re_once ('/var/www/html/Confidential.php');
+<?php
+require_once ('/var/www/html/Confidential.php');
 $servername = Confidential::$servername;
 $username = Confidential::$username;
 $pwd = Confidential::$pwd;
