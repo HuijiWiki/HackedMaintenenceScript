@@ -26,6 +26,6 @@ class InsertSiteRank extends Maintenance {
 			$viewDate[$value] = round($viewResult['yesterday']+$viewResult['week']/3+$viewResult['month']/10);
 			$editDate[$value] = round($editResult['yesterday']+$editResult['week']/3+$editResult['month']/10);
 			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)*2+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)*3);
-		echo $value.' : '.$viewResult['yesterday'].' / '.$viewResult['week'].' / '.$viewResult['month'].' : '.$editResult['yesterday'].' / '.$editResult['week'].' / '.$editResult['month'].' : '.$editUserYesterday[$value].' / '.$editUserWeek[$value].' / '.$editUserMonth[$value]
+		echo $value.' : '.$viewResult['yesterday'].' / '.$viewResult['week'].' / '.$viewResult['month'].' : '.$editResult['yesterday'].' / '.$editResult['week'].' / '.$editResult['month'].' : '.$editUserYesterday[$value].' / '.$editUserWeek[$value].' / '.$editUserMonth[$value];
 		}
 		
