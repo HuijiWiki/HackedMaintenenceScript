@@ -30,4 +30,7 @@ class InsertSiteRank extends Maintenance {
 		}
 	}
 }
+
+$maintClass = 'InsertSiteRank';
+require_once RUN_MAINTENANCE_IF_MAIN;
 		
