@@ -25,7 +25,7 @@ class InsertSiteRank extends Maintenance {
 			$editResult['month'] = $ueb->getSiteEditCount( '', $value, $lastMonth, $yesterday );
 			$viewDate[$value] = round($viewResult['yesterday']+$viewResult['week']/3+$viewResult['month']/10);
 			$editDate[$value] = round($editResult['yesterday']+$editResult['week']/3+$editResult['month']/10);
-			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)*2+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)*3);
+			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)/2+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)/3);
 		}
 		//sort arr
 		asort($viewDate);
