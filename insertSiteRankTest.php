@@ -20,9 +20,12 @@ class InsertSiteRank extends Maintenance {
 			$viewResult['yesterday'] = $ueb->getSiteViewCount( '', $value, $yesterday, $yesterday );
 			$viewResult['week'] = $ueb->getSiteViewCount( '', $value, $lastWeek, $yesterday );
 			$viewResult['month'] = $ueb->getSiteViewCount( '', $value, $lastMonth, $yesterday );
-			$editResult['yesterday'] = $ueb->getSiteEditCount( '', $value, $yesterday, $yesterday );
-			$editResult['week'] = $ueb->getSiteEditCount( '', $value, $lastWeek, $yesterday );
-			$editResult['month'] = $ueb->getSiteEditCount( '', $value, $lastMonth, $yesterday );
+                        $yesterdayEditCount = $ueb->getSiteEditCount( '', $value, $yesterday, $yesterday );
+			$editResult['yesterday'] = empty($yesterdayEditCount)?0:$yesterdayEditCount;
+                        $weekEditCount = $ueb->getSiteEditCount( '', $value, $lastWeek, $yesterday );
+			$editResult['week'] = empty($weekEditCount )?0:$weekEditCount ;
+                        $monthEditCount = $ueb->getSiteEditCount( '', $value, $lastMonth, $yesterday );
+			$editResult['month'] = empty($monthEditCount )?0:$monthEditCount ;
 			$viewDate[$value] = round($viewResult['yesterday']+$viewResult['week']/2+$viewResult['month']/3);
 			$editDate[$value] = round($editResult['yesterday']+$editResult['week']/2+$editResult['month']/3);
 			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)/2+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)/3);
