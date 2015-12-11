@@ -28,6 +28,39 @@ class InsertSiteRank extends Maintenance {
 			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)/2+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)/3);
 			echo $value.' : '.$viewResult['yesterday'].' / '.$viewResult['week'].' / '.$viewResult['month'].' : '.$editResult['yesterday'].' / '.$editResult['week'].' / '.$editResult['month'].' : '.$editUserYesterday[$value].' / '.$editUserWeek[$value].' / '.$editUserMonth[$value];
 		}
+                //sort arr
+		asort($viewDate);
+		asort($editDate);
+		asort($editUserDate);
+		$i=1;
+		//loop score
+		$viewRes = array();
+		$editRes = array();
+		$editUserRes = array();
+		foreach ($viewDate as $key => $value) {
+			$viewRes[$key] = $i*10;
+			$i++;
+		}
+		$j=1;
+		foreach ($editDate as $key => $value) {
+			$editRes[$key] = $j*10;
+			$j++;
+		}
+		$k=1;
+		foreach ($editUserDate as $key => $value) {
+			$editUserRes[$key] = $k*10;
+			$k++;
+		}
+		//highest score
+		$highest = ($k-1)*100;
+		//total weight must add up to 10
+		$allRank = array();
+		foreach ($viewRes as $key => $value) {
+			$allRank[$key] = $value*3.3 + $editRes[$key]*3.0 +$editUserRes[$key]*3.7;
+		}
+		arsort($allRank);
+                print_r($allRank);
+
 	}
 }
 
