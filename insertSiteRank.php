@@ -23,14 +23,15 @@ class InsertSiteRank extends Maintenance {
 			$editResult['yesterday'] = $ueb->getSiteEditCount( '', $value, $yesterday, $yesterday );
 			$editResult['week'] = $ueb->getSiteEditCount( '', $value, $lastWeek, $yesterday );
 			$editResult['month'] = $ueb->getSiteEditCount( '', $value, $lastMonth, $yesterday );
-			$viewDate[$value] = round($viewResult['yesterday']+$viewResult['week']/3+$viewResult['month']/10);
-			$editDate[$value] = round($editResult['yesterday']+$editResult['week']/3+$editResult['month']/10);
-			$editUserDate[$value] = round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)/2+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)/3);
+			$viewDate[$value] = (int)round($viewResult['yesterday']+$viewResult['week']/3+$viewResult['month']/10);
+			$editDate[$value] = (int)round($editResult['yesterday']+$editResult['week']/3+$editResult['month']/10);
+			$editUserDate[$value] = (int)round(isset($editUserYesterday[$value])?$editUserYesterday[$value]:0+(isset($editUserWeek[$value])?$editUserWeek[$value]:0)/2+(isset($editUserMonth[$value])?$editUserMonth[$value]:0)/3);
+		
 		}
 		//sort arr
-		asort($viewDate);
-		asort($editDate);
-		asort($editUserDate);
+		asort($viewDate, SORT_NUMERIC);
+		asort($editDate, SORT_NUMERIC);
+		asort($editUserDate, SORT_NUMERIC);
 		$i=1;
 		//loop score
 		$viewRes = array();
@@ -57,7 +58,7 @@ class InsertSiteRank extends Maintenance {
 		foreach ($viewRes as $key => $value) {
 			$allRank[$key] = $value*3.3 + $editRes[$key]*3.0 +$editUserRes[$key]*3.7;
 		}
-		arsort($allRank);
+		arsort($allRank, SORT_NUMERIC);
 		$x = 1;
 		//final rank
 		foreach ($allRank as $key => $value) {
