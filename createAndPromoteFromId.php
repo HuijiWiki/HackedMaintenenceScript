@@ -47,6 +47,7 @@ class CreateAndPromote extends Maintenance {
 	}
 
 	public function execute() {
+		global $wgHuijiPrefix;
 		$userid = $this->getArg( 0 );
 		$password = $this->getArg( 1 );
 		$force = $this->hasOption( 'force' );
@@ -115,6 +116,10 @@ class CreateAndPromote extends Maintenance {
 			$ssu = new SiteStatsUpdate( 0, 0, 0, 0, 1 );
 			$ssu->doUpdate();
 		}
+		
+		# Auto follow
+		$usf = new UserSiteFollow();
+		$usf->addUserSiteFollow($user, $wgHuijiPrefix);
 
 		$this->output( "done.\n" );
 	}
