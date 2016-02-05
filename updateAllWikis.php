@@ -15,14 +15,14 @@ while ($res = mysql_fetch_assoc( $query )) {
 #putenv("DISABLE_SEARCH_UPDATE = true");
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	#$command = 'php ./update.php --conf='.$conf.' --quick --doshared';
-	#exec($command);
-	#$command2 = 'ln -s /var/www/src/* /var/www/virtual/'.$val['domain_prefix'].'/';
-	#exec($command2);
+	$command = 'php ./update.php --conf='.$conf.' --quick --doshared';
+	exec($command);
+	$command2 = 'ln -s /var/www/src/* /var/www/virtual/'.$val['domain_prefix'].'/';
+	exec($command2);
 	#$command3 = "php ../extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php --conf=".$conf;
 	#exec($command3);
-	$command4 = 'php ./namespaceDupes.php --conf='.$conf.' --fix';
-	exec($command4);
+	#$command4 = 'php ./namespaceDupes.php --conf='.$conf.' --fix';
+	#exec($command4);
 }
 /*	
 putenv("DISABLE_SEARCH_UPDATE = false");
