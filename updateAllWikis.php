@@ -16,9 +16,9 @@ while ($res = mysql_fetch_assoc( $query )) {
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
 	$command = 'php ./update.php --conf='.$conf.' --quick --doshared';
-	exec($command);
 	$command2 = 'ln -s /var/www/src/* /var/www/virtual/'.$val['domain_prefix'].'/';
 	exec($command2);
+	exec($command);
 	#$command3 = "php ../extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php --conf=".$conf;
 	#exec($command3);
 	#$command4 = 'php ./namespaceDupes.php --conf='.$conf.' --fix';
