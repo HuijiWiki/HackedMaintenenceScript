@@ -2,13 +2,13 @@
 
 require_once __DIR__ . "/Maintenance.php";
 class Comp {
-	const NA = -1;
-	const E = 0;
-	const D = 1;
-	const C = 2;
-	const B = 3;
-	const A = 4;
-	const S = 5;
+	public static $NA = -1;
+	public static $E = 0;
+	public static $D = 1;
+	public static $C = 2;
+	public static $B = 3;
+	public static $A = 4;
+	public static $S = 5;
 }
 
 class InsertSiteRank extends Maintenance {
@@ -111,7 +111,13 @@ class InsertSiteRank extends Maintenance {
                         $site = WikiSite::newFromPrefix($key);
                         $pr = $site->getPotentialRating();
                         $cr = $site->getRating();
-                        if ( Comp::$pr > Comp::$cr ){			
+			if ($pr == ''){
+				$pr = 'NA';
+			}
+			if ($cr == ''){
+				$cr = 'NA';
+			}
+                        if ( Comp::$$pr > Comp::$$cr ){			
                                 $site->advanceRating();
                         }
 		}
