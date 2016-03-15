@@ -1,6 +1,15 @@
 <?php
 
 require_once __DIR__ . "/Maintenance.php";
+class Comp {
+	const NA = -1;
+	const E = 0;
+	const D = 1;
+	const C = 2;
+	const B = 3;
+	const A = 4;
+	const S = 5;
+}
 
 class InsertSiteRank extends Maintenance {
 	public function execute() {
@@ -98,6 +107,13 @@ class InsertSiteRank extends Maintenance {
 				);
 			}
 			$x++;
+			//site rating
+                        $site = WikiSite::newFromPrefix($key);
+                        $pr = $site->getPotentialRating();
+                        $cr = $site->getRating();
+                        if ( Comp::$pr > Comp::$cr ){			
+                                $site->advanceRating();
+                        }
 		}
 	}
 }
