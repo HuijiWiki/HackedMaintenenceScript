@@ -15,7 +15,7 @@ while ($res = mysql_fetch_assoc( $query )) {
 #putenv("DISABLE_SEARCH_UPDATE = true");
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command = 'php ./update.php --conf='.$conf.' --quick --doshared';
+	$command = 'php /var/www/src/maintenance/update.php --conf='.$conf.' --quick --doshared';
 	$command2 = 'ln -s /var/www/src/* /var/www/virtual/'.$val['domain_prefix'].'/';
 	exec($command2);
 	exec($command);
