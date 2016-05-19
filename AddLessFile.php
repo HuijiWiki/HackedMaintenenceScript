@@ -12,10 +12,10 @@ class AddLessFile extends Maintenance {
         	if(!is_dir($filePath)){
 			    	mkdir($filePath);
 			    	chmod($filePath, 0777);
-			    	chmod($filePath.'SiteColor.less', 0777);
 			    }
 			file_put_contents($filePath.'SiteColor.less', ''); 
-        }
+        		chmod($filePath.'SiteColor.less', 0777);
+	}
 	}
 }
 $maintClass = 'AddLessFile';
