@@ -1,5 +1,5 @@
 <?php
-require_once ("../Maintenance.php");
+require_once ("Maintenance.php");
 class AddLessFile extends Maintenance {
 	public function __construct(){
 		parent::__construct();
