@@ -34,8 +34,8 @@ foreach($arr as $val){
 	echo $flock;
 	echo exec($flock);
 
-//	$command2 = 'php /var/www/src/maintenance/generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].'/sitemap --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
+	$command2 = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --conf='.$conf;
 //	echo $command2;
-//	exec($command2);
+	exec($command2);
 
 }	
