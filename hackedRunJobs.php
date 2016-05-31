@@ -34,8 +34,4 @@ foreach($arr as $val){
 	echo $flock;
 	echo exec($flock);
 
-	$command2 = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --conf='.$conf;
-//	echo $command2;
-	exec($command2);
-
 }	
