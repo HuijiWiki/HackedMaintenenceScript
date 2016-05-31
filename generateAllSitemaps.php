@@ -19,6 +19,7 @@ foreach($arr as $val){
 	echo $command2;
   	exec($command2);
   	$command3 = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --conf='.$conf;
-//	echo $command2;
-	exec($command3);
+  	$flock = "flock -n /tmp/rebuildLocalisationCacheOn".$val['domain_prefix'].".lock -c '".$command3."'"; 
+	echo $flock;
+	echo exec($flock);
 }
