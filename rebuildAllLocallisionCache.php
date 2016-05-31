@@ -13,7 +13,8 @@ while ($res = mysqli_fetch_assoc( $query )) {
 }
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command2 = 'php /var/www/src/maintenance/generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].'/sitemap --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
-	echo $command2;
-  	exec($command2);
+  	$command3 = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --conf='.$conf;
+  	$flock = "flock -n /tmp/rebuildLocalisationCacheOn".$val['domain_prefix'].".lock -c '".$command3."'"; 
+	echo $flock;
+	echo exec($flock);
 }
