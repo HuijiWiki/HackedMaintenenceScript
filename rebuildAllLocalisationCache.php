@@ -13,7 +13,7 @@ while ($res = mysqli_fetch_assoc( $query )) {
 }
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-  	$command3 = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --conf='.$conf;
+  	$command3 = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --lang=en,zh,zh-cn,zh-hans,zh-hant --conf='.$conf;
   	$flock = "flock -n /tmp/rebuildLocalisationCacheOn".$val['domain_prefix'].".lock -c '".$command3."'"; 
 	echo $flock;
 	echo exec($flock);
