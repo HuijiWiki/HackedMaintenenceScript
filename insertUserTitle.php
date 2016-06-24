@@ -73,7 +73,7 @@ class InsertUserTitle extends Maintenance {
 		                'user_title',
 		                array(
 		                    'gift_id' => $value->ug_gift_id,
-		                    'title_content' => $giftResult[$value->ug_user_id_to],
+		                    'title_content' => $giftResult[$value->ug_gift_id],
 		                    'user_to_id' => $value->ug_user_id_to,
 		                    'is_open' => 1,
 		                    'title_from' => 'gift'
