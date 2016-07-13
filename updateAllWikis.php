@@ -3,12 +3,12 @@ require_once ('/var/www/html/Confidential.php');
 $servername = Confidential::$servername;
 $username = Confidential::$username;
 $pwd = Confidential::$pwd;
-$link=mysql_connect("$servername","$username","$pwd");
-mysql_query("SET NAMES UTF8");
-mysql_select_db("huiji",$link);
+$link=mysqli_connect("$servername","$username","$pwd");
+mysqli_query("SET NAMES UTF8");
+mysqli_select_db("huiji",$link);
 $sql = "select domain_prefix from domain";
-$query = mysql_query($sql);
-while ($res = mysql_fetch_assoc( $query )) {
+$query = mysqli_query($sql);
+while ($res = mysqli_fetch_assoc( $query )) {
 	$arr[] = $res;
 }
 
