@@ -4,11 +4,11 @@ $servername = Confidential::$servername;
 $username = Confidential::$username;
 $pwd = Confidential::$pwd;
 $link=mysqli_connect("$servername","$username","$pwd");
-mysqli_query("SET NAMES UTF8");
-mysqli_select_db("huiji",$link);
+mysqli_query($link, "SET NAMES UTF8");
+mysqli_select_db($link, "huiji", $link);
 $sql = "select domain_prefix from domain";
-$query = mysqli_query($sql);
-while ($res = mysqli_fetch_assoc( $query )) {
+$query = mysqli_query($link, $sql);
+while ($res = mysqli_fetch_assoc($link, $query )) {
 	$arr[] = $res;
 }
 
