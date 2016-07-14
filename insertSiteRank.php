@@ -68,7 +68,7 @@ class InsertSiteRank extends Maintenance {
 		//total weight must add up to 10
 		$allRank = array();
 		foreach ($viewRes as $key => $value) {
-			$allRank[$key] = $value*3.3 + $editRes[$key]*3.0 +$editUserRes[$key]*3.7;
+			$allRank[$key] = $value*5.3 + $editRes[$key]*2.0 +$editUserRes[$key]*2.7;
 		}
 		arsort($allRank, SORT_NUMERIC);
 		$x = 1;
