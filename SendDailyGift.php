@@ -6,7 +6,7 @@ class SendDailyGift extends Maintenance {
 		$this->addOption( 'monthly', 'if true,send monthly gift, else send weekly' );
 	}
 	public function execute() {
-		global $wgContLang;
+		global $wgContLang, $wgMemc;
 		if ( $this->hasOption('monthly') ) {
 			$period = 'monthly';
 		}else{
@@ -75,7 +75,7 @@ class SendDailyGift extends Maintenance {
 				$last_total = $row->up_points;
 				$x++;
 				$userObj = User::newFromId( $row->up_user_id );
-                $user_group = $userObj->getEffectiveGroups();
+                		$user_group = $userObj->getEffectiveGroups();
 				if ( !in_array('bot', $user_group) && !in_array('bot-global',$user_group)  ) {
 					$users[] = array(
 						'user_id' => $row->up_user_id,
@@ -146,6 +146,10 @@ class SendDailyGift extends Maintenance {
 
 			// Clear the current point table to make way for the next period
 			$res = $dbw->delete( "user_points_{$period}", '*', __METHOD__ );
+			$key = wfGlobalCacheKey('UserStats', 'getUserRank', '10', 'week');
+			$key2 = wfGlobalCacheKey('UserStats', 'getUserRank', '10', 'month');
+			$wgMemc->delete($key);
+			$wgMemc->delete($key2);
 		}
 	}
 }
