@@ -146,8 +146,8 @@ class SendDailyGift extends Maintenance {
 
 			// Clear the current point table to make way for the next period
 			$res = $dbw->delete( "user_points_{$period}", '*', __METHOD__ );
-			$key = wfGlobalCacheKey('UserStats', 'getUserRank', '10', 'week');
-			$key2 = wfGlobalCacheKey('UserStats', 'getUserRank', '10', 'month');
+			$key = wfForeignMemcKey('huiji', '', 'UserStats', 'getUserRank', '10', 'week');
+			$key2 = wfForeignMemcKey('huiji','','UserStats', 'getUserRank', '10', 'month');
 			$wgMemc->delete($key);
 			$wgMemc->delete($key2);
 		}
