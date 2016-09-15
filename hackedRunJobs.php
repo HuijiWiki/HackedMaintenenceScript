@@ -11,7 +11,6 @@ $query = mysqli_query($link, $sql);
 while ($res = mysqli_fetch_assoc( $query )) {
 	$arr[] = $res;
 }
-
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
 	$command = 'php /var/www/src/maintenance/runJobs.php --conf='.$conf;
@@ -34,4 +33,4 @@ foreach($arr as $val){
 	echo $flock;
 	echo exec($flock);
 
-}	
+}
