@@ -14,7 +14,7 @@ while ($res = mysqli_fetch_assoc( $query )) {
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
 	$command = 'hhvm /var/www/src/maintenance/runJobs.php --memory-limit=max --conf='.$conf;
-	$lowDashPrefix = mysqli_real_escape_string($link, str_replace('.', '_', $val['domain_prefix']));
+	/*$lowDashPrefix = mysqli_real_escape_string($link, str_replace('.', '_', $val['domain_prefix']));
 	if ($val['domain_prefix'] != 'www'){
 		mysqli_select_db($link, "huiji_sites");
 		$sql1 = "UPDATE ".$lowDashPrefix."job SET  `job_token` =  '' WHERE `job_attempts` > 0 and `job_attempts` < 3";
@@ -27,7 +27,7 @@ foreach($arr as $val){
 	}
 	//echo $sql1 . $sql2;
 	$query = mysqli_query($link, $sql1);
-	$query .= mysqli_query($link, $sql2);
+	$query .= mysqli_query($link, $sql2);*/
 	echo $command;
 	$flock = "flock -n /tmp/".$val['domain_prefix'].".lock -c '".$command."'"; 
 	echo $flock;
