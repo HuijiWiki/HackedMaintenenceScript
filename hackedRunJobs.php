@@ -14,7 +14,7 @@ while ($res = mysqli_fetch_assoc( $query )) {
 shuffle($arr);
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command = 'php /var/www/src/maintenance/runJobs.php --memory-limit=max --conf='.$conf;
+	$command = 'php /var/www/src/maintenance/runJobs.php --procs=5 --maxtime=180 --conf='.$conf;
 	/*$lowDashPrefix = mysqli_real_escape_string($link, str_replace('.', '_', $val['domain_prefix']));
 	if ($val['domain_prefix'] != 'www'){
 		mysqli_select_db($link, "huiji_sites");
