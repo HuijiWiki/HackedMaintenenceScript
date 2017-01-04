@@ -15,7 +15,11 @@ while ($res = mysqli_fetch_assoc($query )) {
 #putenv("DISABLE_SEARCH_UPDATE = true");
 foreach($arr as $val){
 	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command = 'php /var/www/src/maintenance/update.php --conf='.$conf.' --quick';
+	if ($val == "www"){
+		$command = 'php /var/www/src/maintenance/update.php --conf='.$conf.' --quick --doshared';
+	} else {
+		$command = 'php /var/www/src/maintenance/update.php --conf='.$conf.' --quick';
+	}
 	$command2 = 'ln -s /var/www/src/* /var/www/virtual/'.$val['domain_prefix'].'/';
 	exec($command2);
 	exec($command);
