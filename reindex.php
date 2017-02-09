@@ -13,16 +13,14 @@ while ($res = mysqli_fetch_assoc( $query )) {
 }
 putenv("DISABLE_SEARCH_UPDATE = true");
 foreach($arr as $val){
-	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command3 = "php ../extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php --conf=".$conf;
-	exec($command3);
+	$id = str_replace('-', '*', $val['domain_prefix']).'_';
+	$command = "php ../extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php --startOver --wiki=".$id;
+	exec($command);
 }
 	
 putenv("DISABLE_SEARCH_UPDATE = false");
 foreach($arr as $val){
-	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command4 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipLinks --indexOnSkip --conf=".$conf.' &';
-	exec($command4);
-	$command5 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipParse --conf=".$conf.' &'; 
-	exec($command5);
+	$id = str_replace('-', '*', $val['domain_prefix']).'_';
+	$command = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --queue --wiki=".$id.' &';
+	exec($command);
 }

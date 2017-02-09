@@ -14,30 +14,11 @@ while ($res = mysqli_fetch_assoc($query )) {
 
 #putenv("DISABLE_SEARCH_UPDATE = true");
 foreach($arr as $val){
-	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	if ($val == "www"){
-		$command = 'php /var/www/src/maintenance/update.php --conf='.$conf.' --quick --doshared';
+	$id = str_replace('-', '*', $val['domain_prefix']).'_';
+	if ($val['domain_prefix'] == "www"){
+		$command = 'php /var/www/src/maintenance/update.php --wiki='.$id.' --quick --doshared';
 	} else {
-		$command = 'php /var/www/src/maintenance/update.php --conf='.$conf.' --quick';
+		$command = 'php /var/www/src/maintenance/update.php --wiki='.$id.' --quick';
 	}
-	$command2 = 'ln -s /var/www/src/* /var/www/virtual/'.$val['domain_prefix'].'/';
-	exec($command2);
 	exec($command);
-	#$command3 = "php ../extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php --conf=".$conf;
-	#exec($command3);
-	#$command4 = 'php ./namespaceDupes.php --conf='.$conf.' --fix';
-	#exec($command4);
 }
-/*	
-putenv("DISABLE_SEARCH_UPDATE = false");
-
-
-foreach($arr as $val){
-	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-
-	$command4 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipLinks --indexOnSkip --conf=".$conf.' &';
-	exec($command4);
-
-	$command5 = "php ../extensions/CirrusSearch/maintenance/forceSearchIndex.php --skipParse --conf=".$conf.' &'; 
-	exec($command5);
-}*/

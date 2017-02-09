@@ -12,8 +12,7 @@ while ($res = mysqli_fetch_assoc( $query )) {
 	$arr[] = $res;
 }
 foreach($arr as $val){
-	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-	$command2 = 'php /var/www/src/maintenance/generateSitemap.php --conf='.$conf.' --fspath=/var/www/virtual/'.$val['domain_prefix'].'/sitemap --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
-	echo $command2;
-  	exec($command2);
+	$id = str_replace('-', '*', $val['domain_prefix']).'_';
+	$command = 'php /var/www/src/maintenance/generateSitemap.php --fspath=/var/www/src/sitemap/ --wiki=huiji_sites-'.$id.' --urlpath=http://'.$val['domain_prefix'].'.huiji.wiki/sitemap/ --server=http://'.$val['domain_prefix'].'.huiji.wiki/';
+  	exec($command);
 }

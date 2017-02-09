@@ -12,9 +12,7 @@ while ($res = mysqli_fetch_assoc( $query )) {
 	$arr[] = $res;
 }
 foreach($arr as $val){
-	$conf = '/var/www/virtual/'.$val['domain_prefix'].'/LocalSettings.php';
-  	$command3 = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --lang=en,zh,zh-cn,zh-hans,zh-hant --conf='.$conf;
-  	$flock = "flock -n /tmp/rebuildLocalisationCacheOn".$val['domain_prefix'].".lock -c '".$command3."'"; 
-	echo $flock;
-	echo exec($flock);
+	$id = str_replace('-', '*', $val['domain_prefix']).'_';
+  	$command = 'php /var/www/src/maintenance/rebuildLocalisationCache.php --lang=en,zh,zh-cn,zh-hans,zh-hant --wiki='.$id;
+  	echo exec($command);
 }
